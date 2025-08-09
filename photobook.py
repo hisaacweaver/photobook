@@ -50,6 +50,7 @@ def upload_image(image_data, folder_name, file_name, metadata=None):
 
 
 st.title("Benjamin and Emmy Wedding Photobook")
+st.write("Version 1.0")
 
 if st.query_params.get("view"):
     show_view_tab = True
