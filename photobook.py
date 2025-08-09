@@ -10,12 +10,13 @@ from datetime import timedelta
 import random
 from datetime import datetime
 
+
+st.write("Version 1.1")
 st.markdown("""
 
 <style>
             .stAppHeader {display: none;}
-            a[href*="https://streamlit.io/cloud"] {display: none;}
-            a[href*="https://share.streamlit.io/user/hisaacweaver"] {display: none;}
+            [class*="_container"] {display: none;}
             
 </style>
 
@@ -50,7 +51,7 @@ def upload_image(image_data, folder_name, file_name, metadata=None):
 
 
 st.title("Benjamin and Emmy Wedding Photobook")
-st.write("Version 1.0")
+
 
 if st.query_params.get("view"):
     show_view_tab = True
