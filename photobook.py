@@ -11,12 +11,11 @@ import random
 from datetime import datetime
 
 
-st.write("Version 1.25")
+# st.write("Version 1.25")
 st.markdown("""
 
 <style>
             .stAppHeader {display: none;}
-            [data-testid*="appCreatorAvatar"] {display: none;}
             
 </style>
 
