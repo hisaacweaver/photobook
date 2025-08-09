@@ -10,6 +10,17 @@ from datetime import timedelta
 import random
 from datetime import datetime
 
+st.markdown("""
+
+<style>
+            .stAppHeader {display: none;}
+            a [href^="https://streamlit.io/cloud"] {display: none;}
+            [class*="_profileContainer"] {display: none;}
+</style>
+
+""", unsafe_allow_html=True)
+
+
 # Create credentials object from Streamlit secrets
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["GCP"]
@@ -48,7 +59,7 @@ tab_titles = ["Upload Image"]
 if show_view_tab:
     tab_titles.append("View Images")
 
-tabs = st.tabs(tab_titles)
+
 
 wedding_words = [
     "bride", "groom", "ceremony", "reception", "vows", "rings", "bouquet",
@@ -59,9 +70,8 @@ wedding_words = [
     "wedding planner", "engagement", "proposal", "unity", "bliss", "commitment"
 ]
 
-
-with tabs[0]:
-        
+if not show_view_tab:
+    
 
     st.write("Take a few pictures to upload so we can remember this special day!")
 
@@ -70,7 +80,7 @@ with tabs[0]:
     adding_note = st.toggle("Add a note with this image", key="add_note")
     comment = ""
     if adding_note:
-        comment = st.text_area("Add a note with this image", placeholder="Add a note here...", key="image_note")
+        comment = st.text_area("", placeholder="Add a note here...", key="image_note")
 
     if st.button("Upload Image"):
         if upload_package:
@@ -85,8 +95,35 @@ with tabs[0]:
         else:
             st.error("Please upload at least one image file.")
 
+else:
+    tabs = st.tabs(tab_titles)
+    with tabs[0]:
+            
 
-if show_view_tab:
+        st.write("Take a few pictures to upload so we can remember this special day!")
+
+        upload_package = st.file_uploader("Upload Images", type=["jpg", "jpeg", "png", "heic"], key="image_uploader", accept_multiple_files=True)
+
+        adding_note = st.toggle("Add a note with this image", key="add_note")
+        comment = ""
+        if adding_note:
+            comment = st.text_area("", placeholder="Add a note here...", key="image_note")
+
+        if st.button("Upload Image"):
+            if upload_package:
+                if not isinstance(upload_package, list):
+                    upload_package = [upload_package]
+                for idx, image_file in enumerate(upload_package):
+                    random_word = random.choice(wedding_words)
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    file_name = f"{timestamp}_{random_word}_{idx}.png"
+                    public_url = upload_image(image_file, "Benjamin_Emmy_Wedding", file_name, metadata={"note": comment})
+                st.success(f"{len(upload_package)} image{'' if len(upload_package) == 1 else 's'} uploaded successfully!")
+            else:
+                st.error("Please upload at least one image file.")
+
+
+
     
 
     with tabs[1]:
