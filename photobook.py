@@ -11,12 +11,13 @@ import random
 from datetime import datetime
 
 
-st.write("Version 1.1")
+st.write("Version 1.2")
 st.markdown("""
 
 <style>
             .stAppHeader {display: none;}
-            [class*="_container"] {display: none;}
+            ._container_gzau3_1 {display: none;}
+            ._profileContainer_gzau3_53 {display: none;}
             
 </style>
 
