@@ -14,8 +14,9 @@ st.markdown("""
 
 <style>
             .stAppHeader {display: none;}
-            a [href^="https://streamlit.io/cloud"] {display: none;}
-            [class*="_profileContainer"] {display: none;}
+            a[href^="https://streamlit.io/cloud"] {display: none;}
+            a[href^="https://share.streamlit.io/user/hisaacweaver"] {display: none;}
+            
 </style>
 
 """, unsafe_allow_html=True)
